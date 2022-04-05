@@ -8,17 +8,17 @@ export const adminMenu = [
         title: "Project Planning",
         url: "projectplan",
         icon: "IoClipboardOutline",
-        submenu:[
+        submenu: [
             {
-                title:"Plan A Project",
+                title: "Plan A Project",
                 url: "planning"
             },
             {
-                title:"Project Review",
+                title: "Project Review",
                 url: "review"
             },
             {
-                title:"Design Assignment",
+                title: "Design Assignment",
                 url: "design"
             },
         ]
@@ -56,6 +56,13 @@ export const adminMenu = [
     {
         title: "People Management",
         url: "people",
-        icon: "IoAccessibilityOutline"
+        icon: "IoAccessibilityOutline",
+        submenu: [
+            {
+                title: "Add People",
+                url: "addpeople"
+            },
+
+        ]
     }
 ];
