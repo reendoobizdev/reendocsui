@@ -1,5 +1,5 @@
+import logo from './logo.jpeg'; // with import
 export default function AddPeople() {
-
     const mystyle = {
         color: "black",
         backgroundColor: "white",
@@ -9,35 +9,50 @@ export default function AddPeople() {
         fontFamily: "Arial"
     }
 
+    const bold = {
+        fontWeight: "bold",
+        fontSize: "25px"
+    }
+    // console.log(logo)
     return (
         <div style={mystyle}>
             <form>
                 <div className="grid  md:grid-cols-2 gap-2">
-                    <div className="relative w-full mb-3">
-                        <label
-                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                            htmlFor="grid-password"
-                        >
-                            Username
-                        </label>
-                        <input
-                            type="text"
-                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            defaultValue=""
-                        />
-                    </div>
+                    <section>
+                        <p style={bold}>Add People </p>
+                    </section>
                 </div>
                 <div className="grid md:grid-cols-2 gap-2">
-                    <div>One of three columns</div>
-                    <div>One of three columns</div>
+                    <div>
+                        <p>Full Name </p>
+                        <input class="input-0" />
+                    </div>
+                    <div>
+                        <p>Photo </p>
+                        <img src={logo.src} />
+                    </div>
                 </div>
                 <div className="grid  md:grid-cols-2 gap-2">
-                    <div>One of three columns</div>
-                    <div>One of three columns</div>
+                    <div><p>Department </p>
+                        <input class="input-3" /></div>
+
                 </div>
                 <div className="grid  md:grid-cols-2 gap-2">
-                    <div>One of three columns</div>
-                    <div>One of three columns</div>
+                    <div><p>Position</p>
+                        <input class="input-4 right" /></div>
+
+                </div>
+                <div className="grid  md:grid-cols-2 gap-2">
+                    <div> <p>Email Address</p>
+                        <input class="input-1 right" /></div>
+                </div>
+                <div className="grid  md:grid-cols-2 gap-2">
+                    <div> <p>Phone No </p>
+                        <input class="input-5" /></div>
+                </div>
+                <div className="grid  md:grid-cols-2 gap-2">
+                    <div> <p>User Role </p>
+                        <input class="input-6" /></div>
                 </div>
             </form>
         </div>
