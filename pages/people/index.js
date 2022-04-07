@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import axios from 'axios';
 import Cleave from 'cleave.js/react';
 export default function People() {
     const mystyle = {
@@ -15,9 +15,12 @@ export default function People() {
         fontWeight: "bold",
         fontSize: "25px"
     }
+
+
     
-
-
+    axios.get('http://localhost:3123/api/questions/5?limit=10').then(response => {
+        console.log(response.data.question);
+    });
     return (
         <div style={mystyle}>
             <section>
