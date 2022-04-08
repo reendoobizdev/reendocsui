@@ -18,9 +18,9 @@ export default function People() {
 
 
     
-    axios.get('http://localhost:3123/api/questions/5?limit=10').then(response => {
-        console.log(response.data.question);
-    });
+    // axios.get('http://localhost:3123/api/questions/5?limit=10').then(response => {
+    //     console.log(response.data.question);
+    // });
     return (
         <div style={mystyle}>
             <section>
