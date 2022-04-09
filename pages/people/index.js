@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UsingFetch from '../../service/peopleService';
 import axios from 'axios';
 import Cleave from 'cleave.js/react';
 export default function People() {
@@ -16,47 +17,12 @@ export default function People() {
         fontSize: "25px"
     }
 
-
+    const users = UsingFetch()
     
-    axios.get('http://localhost:3123/api/questions/5?limit=10').then(response => {
-        console.log(response.data.question);
-    });
+    
     return (
         <div style={mystyle}>
-            <section>
-                <p style={bold}>Add People </p>
-            </section>
-            <br></br>
-
-            <section>
-                <p>Full Name </p>
-                <input class="input-0" />
-            </section>
-
-            <section>
-                <p>Department </p>
-                <input class="input-3" />
-            </section>
-
-            <section>
-                <p>Position</p>
-                <input class="input-4 right" />
-            </section>
-
-            <section>
-                <p>Email Address</p>
-                <input class="input-1 right" />
-            </section>
-
-            <section>
-                <p>Phone No </p>
-                <input class="input-5" />
-            </section>
-
-            <section>
-                <p>User Role </p>
-                <input class="input-6" />
-            </section>
+           {users}
 
         </div>
     )
