@@ -4,7 +4,8 @@ const UsingFetch = () => {
   const [users, setUsers] = useState([])
 
   const fetchData = () => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://localhost:7276/api/People")
       .then(response => {
         return response.json()
       })
@@ -20,11 +21,26 @@ const UsingFetch = () => {
   return (
     <div>
       {users.length > 0 && (
-        <ul>
+        <div>
           {users.map(user => (
-            <li key={user.id}>{user.name}</li>
+            <div key={user.id} style={{ backgroundColor: "#D0CCCC", width: "100%", marginTop: "10px" }} className="flex">
+              <div className="flex-none w-14 h-14" >
+                <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." style={{ width: "35px" }} class="shadow rounded-full  align-middle border-none" />
+              </div>
+              <div className="flex-none w-14 h-14" style={{ width: "15%", marginLeft: "30px" }}>
+                {user.name}
+              </div>
+              <div className="flex-none w-14 h-14" style={{ marginLeft: "30%" }}>
+                <p>Role</p>
+              </div>
+              <div className="flex-none w-14 h-14" style={{ marginLeft: "30% " }}>
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full" >
+                  Remove
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   )
