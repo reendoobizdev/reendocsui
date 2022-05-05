@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react"
-
+import axios from "axios"
 const UsingFetch = () => {
   const [users, setUsers] = useState([])
 
-  const fetchData = () => {
-    // fetch("https://jsonplaceholder.typicode.com/users")
-    fetch("https://localhost:7276/api/People")
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        setUsers(data)
-      })
+  const fetchData = ()=>{
+    axios.get("https://jsonplaceholder.typicode.com/users")
+    .then(response =>{
+      return response.data
+    })
+    .then(data =>{
+      setUsers(data)
+    })
   }
 
   useEffect(() => {
@@ -25,7 +24,7 @@ const UsingFetch = () => {
           {users.map(user => (
             <div key={user.id} style={{ backgroundColor: "#D0CCCC", width: "100%", marginTop: "10px" }} className="flex">
               <div className="flex-none w-14 h-14" >
-                <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." style={{ width: "35px" }} class="shadow rounded-full  align-middle border-none" />
+                <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." style={{ width: "35px" }} className="shadow rounded-full  align-middle border-none" />
               </div>
               <div className="flex-none w-14 h-14" style={{ width: "15%", marginLeft: "30px" }}>
                 {user.name}

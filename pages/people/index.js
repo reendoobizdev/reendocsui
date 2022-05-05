@@ -20,7 +20,9 @@ export default function People() {
 
     const users = UsingFetch()
 
-
+    const deletes = (id) =>{
+        axios.delete(`https://localhost:7276/api/People/${id}`);
+    }
     return (
         <div>
 
