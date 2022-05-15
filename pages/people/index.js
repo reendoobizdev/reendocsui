@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UsingFetch from '../../service/peopleService';
+import {UsingFetch } from '../../service/peopleService';
 import axios from 'axios';
 import Cleave from 'cleave.js/react';
 export default function People() {
@@ -20,9 +20,7 @@ export default function People() {
 
     const users = UsingFetch()
 
-    const deletes = (id) =>{
-        axios.delete(`https://localhost:7276/api/People/${id}`);
-    }
+    // const deletes = deletePeople(id)
     return (
         <div>
 

@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-const UsingFetch = () => {
+export const UsingFetch = () => {
   const [users, setUsers] = useState([])
 
   const fetchData = ()=>{
     axios.get("https://jsonplaceholder.typicode.com/users")
     .then(response =>{
-      return response.data
+      setUsers(response.data)
     })
-    .then(data =>{
-      setUsers(data)
-    })
+    
   }
 
   useEffect(() => {
     fetchData()
   }, [])
 
+  function deletePeople(id){
+    console.log(id)
+    // axios.delete(`https://localhost:7276/api/People/${id}`).then(res =>{
+    //   location.reload();
+    // });
+  }
   return (
     <div>
       {users.length > 0 && (
@@ -33,7 +37,7 @@ const UsingFetch = () => {
                 <p>Role</p>
               </div>
               <div className="flex-none w-14 h-14" style={{ marginLeft: "30% " }}>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full" >
+                <button  className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full" onClick={()=>{deletePeople(user.id)}}>
                   Remove
                 </button>
               </div>
@@ -45,4 +49,3 @@ const UsingFetch = () => {
   )
 }
 
-export default UsingFetch
