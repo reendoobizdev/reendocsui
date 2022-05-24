@@ -2,6 +2,7 @@ import logo from './logo.jpeg'; // with import
 import Department from '../../service/departmentService';
 import Position from '../../service/positionService';
 import axios from 'axios';
+import React, { useRef } from 'react';
 export default function AddPeople() {
     const mystyle = {
         color: "black",
@@ -30,29 +31,34 @@ export default function AddPeople() {
         event.preventDefault();
         const user = {
             id: 0,
-            userName : event.target.name.value,
-            password : 123456
+            userName: event.target.name.value,
+            password: 123456
         }
         const people = {
-            id : 0,
-            departmentId : event.target.department.value,
-            positionId : event.target.position.value,
-            userId : 0,
-            fullName : event.target.name.value,
+            id: 0,
+            departmentId: event.target.department.value,
+            positionId: event.target.position.value,
+            userId: 0,
+            fullName: event.target.name.value,
             email: event.target.email.value,
             phone: event.target.phone.value,
-            role : event.target.role.value,
-            photo : event.target.photo.value
+            role: event.target.role.value,
+            photo: event.target.photo.value
         }
-        ;
-        console.log(people)
-        (await axios.post("https://localhost:7276/people",{people}))
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-          })
-       
-      };
+            ;
+        console.log(event.target.photo.value)
+            (await axios.post("https://localhost:7276/people", { people }))
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+
+    };
+    const inputFile = useRef(null)
+    const onButtonClick = () => {
+        // `current` points to the mounted file input element
+        inputFile.current.click();
+    };
     return (
         <div style={mystyle}>
             <form onSubmit={submitContact}>
@@ -66,7 +72,7 @@ export default function AddPeople() {
                         <div className="grid md:grid-cols-2 gap-2">
                             <div>
                                 <p>Full Name </p>
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text"  name="name"/>
+                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" name="name" />
                             </div>
                         </div>
                         <div className="grid  md:grid-cols-2 gap-2">
@@ -109,7 +115,8 @@ export default function AddPeople() {
                         <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                             Remove
                         </button>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style={{ marginLeft: "10px", marginTop: "10px" }}>
+                        <input name='photo' className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="file" accept="image/*" ref={inputFile} style={{ display: 'none' }} />
+                        <button onClick={onButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style={{ marginLeft: "10px", marginTop: "10px" }}>
                             Upload Photo
                         </button>
                     </div>
@@ -118,11 +125,11 @@ export default function AddPeople() {
                     <div>
                         <br></br>
                         <button
-        type="submit"
-        className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
-      >
-        Submit
-      </button>
+                            type="submit"
+                            className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
 
