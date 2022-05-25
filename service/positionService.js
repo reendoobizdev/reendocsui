@@ -20,7 +20,7 @@ const Position = () => {
     return (
         position.length > 0 && (
             position.map(user => (
-                <option>{user.name}</option>
+                <option key={user.id} value={user.id} >{user.name}</option>
             ))
         )
     )

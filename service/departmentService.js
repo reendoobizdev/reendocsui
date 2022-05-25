@@ -20,7 +20,7 @@ const Department = () => {
     return (
         department.length > 0 && (
             department.map(user => (
-                <option>{user.name}</option>
+                <option key={user.id} value={user.id}>{user.name}</option>
             ))
         )
     )
