@@ -2,8 +2,17 @@ import logo from './logo.jpeg'; // with import
 import Department from '../../service/departmentService';
 import Position from '../../service/positionService';
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useRef , useState } from 'react';
 export default function AddPeople() {
+    const fileToDataUri = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          resolve(event.target.result)
+        };
+        reader.readAsDataURL(file);
+        })
+        const [peoples, setPeoples] = useState([]);
+    const [dataUri, setDataUri] = useState('')
     const mystyle = {
         color: "black",
         backgroundColor: "white",
@@ -25,40 +34,66 @@ export default function AddPeople() {
     const input = {
         width: "50%"
     }
+    
     const department = Department()
     const position = Position()
     const submitContact = async (event) => {
         event.preventDefault();
-        const user = {
-            id: 0,
-            userName: event.target.name.value,
-            password: 123456
-        }
+        let image = dataUri ? dataUri : null;
+        
         const people = {
             id: 0,
             departmentId: event.target.department.value,
             positionId: event.target.position.value,
-            userId: 0,
+            userId: null,
             fullName: event.target.name.value,
             email: event.target.email.value,
             phone: event.target.phone.value,
-            role: event.target.role.value,
-            photo: event.target.photo.value
-        }
-            ;
-        console.log(event.target.photo.value)
-            (await axios.post("https://localhost:7276/people", { people }))
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+            photo: image
+        };
+        addPeople(people);
+        // console.log(dataUri.replace('data:image/png;base64,',''))\
+            // (await axios.post("https://localhost:7276/people", { people }))
+            // .then(res => {
+            //     console.log(res);
+            // })
 
     };
+    const addPeople = (body) =>{
+        axios.post('https://localhost:7276/api/People',{
+            id: body.id,
+            departmentId : body.departmentId,
+            positionId : body.positionId,
+            userId : body.userId,
+            fullName: body.fullName,
+            email : body.email,
+            phone : body.phone,
+            photo : body.photo
+        }).then((response) => {
+            console.log(response);
+         });
+    }
     const inputFile = useRef(null)
     const onButtonClick = () => {
         // `current` points to the mounted file input element
         inputFile.current.click();
     };
+    const onChange = (file) => {
+    
+        if(!file) {
+          setDataUri('');
+          return;
+        }
+    
+        fileToDataUri(file)
+          .then(dataUri => {
+            setDataUri(dataUri)
+          })
+        
+      };
+    const remove = ()=>{
+        setDataUri(null);
+    }
     return (
         <div style={mystyle}>
             <form onSubmit={submitContact}>
@@ -111,11 +146,11 @@ export default function AddPeople() {
                         </div>
                     </div>
                     <div>
-                        <img name="photo" src={logo.src} style={photo} />
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                        <img name="photo" src={dataUri ? dataUri :logo.src} style={photo} />
+                        <button onClick={remove} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                             Remove
                         </button>
-                        <input name='photo' className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="file" accept="image/*" ref={inputFile} style={{ display: 'none' }} />
+                        <input name='photo' onChange={(event) => onChange(event.target.files[0] || null)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="file" accept="image/*" ref={inputFile} style={{ display: 'none' }} />
                         <button onClick={onButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style={{ marginLeft: "10px", marginTop: "10px" }}>
                             Upload Photo
                         </button>

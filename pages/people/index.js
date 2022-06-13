@@ -26,11 +26,11 @@ export default function People() {
 
             <div style={mystyle}>
                 <div className='flex' style={{marginBottom : "-5px"}} >
-                    <div className="flex-none w-14 h-14" style={{ width: "15%", backgroundColor: "#D0CCCC" }}>
+                    <div className="flex-none w-14 h-14" style={{ width: "15%" }}>
                         <div>User</div>
                         {/* <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." style={{ width: "35px" }} class="shadow rounded-full  align-middle border-none" /> */}
                     </div>
-                    <div className="flex-none w-14 h-14" style={{ width: "15%", marginLeft: "30px" }}>
+                    <div className="flex-none w-14 h-14" style={{ width: "15%" , backgroundColor: "#D0CCCC", marginLeft: "30px" }}>
                         {/* {user.name} */}
                         <div>People</div>
                     </div>

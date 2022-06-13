@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react"
+import axios from "axios"
 
 const Position = () => {
-    const [position, setPosition] = useState([])
+    const [positions, setPosition] = useState([])
 
-    const fetchData = () => {
-        fetch("https://localhost:7276/api/Position")
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                setPosition(data)
-            })
-    }
-
-    useEffect(() => {
+    const fetchData = ()=>{
+        axios.get("https://localhost:7276/api/Position")
+        .then(response =>{
+            setPosition(response.data)
+        })
+        
+      }
+    
+      useEffect(() => {
         fetchData()
-    }, [])
+      }, [])
 
     return (
-        position.length > 0 && (
-            position.map(user => (
-                <option key={user.id} value={user.id} >{user.name}</option>
+        positions.length > 0 && (
+            positions.map(position => (
+                <option key={position.id} value={position.id} >{position.name}</option>
             ))
         )
     )
