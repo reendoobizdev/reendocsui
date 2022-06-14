@@ -16,10 +16,16 @@ export const UsingFetch = () => {
   }, [])
 
   function setToUser(id){
-    console.log(id)
-    // axios.delete(`https://localhost:7276/api/People/${id}`).then(res =>{
-    //   location.reload();
-    // });
+    console.log(typeof id)
+    const data = id;
+    updatePeople(data);
+  }
+  const updatePeople = (id) =>{
+    axios.put(`https://localhost:7276/api/People/${id}`,{
+      id: id
+    }).then(res =>{
+      location.reload();
+    });
   }
   return (
     <div>
@@ -37,9 +43,9 @@ export const UsingFetch = () => {
                 <p>Role</p>
               </div>
               <div className="flex-none w-14 h-14" style={{ marginLeft: "30% " }}>
-                <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full" onClick={()=>{setToUser(user.id)}}>
+                {!user.userId ?  <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full" onClick={()=>{setToUser(user.id)}}>
                   Set To User
-                </button>
+                </button> : null}
               </div>
             </div>
           ))}
