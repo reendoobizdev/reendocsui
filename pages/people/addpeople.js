@@ -3,7 +3,9 @@ import Department from '../../service/departmentService';
 import Position from '../../service/positionService';
 import axios from 'axios';
 import React, { useRef , useState } from 'react';
+import { useRouter } from 'next/router';
 export default function AddPeople() {
+    const router = useRouter();
     const fileToDataUri = (file) => new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (event) => {
@@ -51,7 +53,8 @@ export default function AddPeople() {
             phone: event.target.phone.value,
             photo: image
         };
-        addPeople(people);
+        await addPeople(people);
+        router.push(`/people`);
         // console.log(dataUri.replace('data:image/png;base64,',''))\
             // (await axios.post("https://localhost:7276/people", { people }))
             // .then(res => {
@@ -59,8 +62,8 @@ export default function AddPeople() {
             // })
 
     };
-    const addPeople = (body) =>{
-        axios.post('https://localhost:7276/api/People',{
+    const addPeople = async (body) =>{
+        const response = await axios.post('https://localhost:7276/api/People',{
             id: body.id,
             departmentId : body.departmentId,
             positionId : body.positionId,
@@ -69,9 +72,7 @@ export default function AddPeople() {
             email : body.email,
             phone : body.phone,
             photo : body.photo
-        }).then((response) => {
-            console.log(response);
-         });
+        });
     }
     const inputFile = useRef(null)
     const onButtonClick = () => {

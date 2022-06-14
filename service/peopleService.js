@@ -20,11 +20,9 @@ export const UsingFetch = () => {
     const data = id;
     updatePeople(data);
   }
-  const updatePeople = (id) =>{
-    axios.put(`https://localhost:7276/api/People/${id}`,{
+  const updatePeople = async (id) =>{
+    const res = await axios.put(`https://localhost:7276/api/People/${id}`,{
       id: id
-    }).then(res =>{
-      location.reload();
     });
   }
   return (
