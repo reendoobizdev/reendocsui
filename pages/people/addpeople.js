@@ -30,7 +30,8 @@ export default function AddPeople() {
     }
     const photo = {
         width: "200px",
-        height: "250px"
+        height: "250px",
+        objectFit: "cover"
     }
     // console.log(logo)
     const input = {
@@ -53,6 +54,7 @@ export default function AddPeople() {
             phone: event.target.phone.value,
             photo: image
         };
+        // console.log('terupload');
         await addPeople(people);
         router.push(`/people`);
         // console.log(dataUri.replace('data:image/png;base64,',''))\
@@ -82,7 +84,7 @@ export default function AddPeople() {
     const onChange = (file) => {
     
         if(!file) {
-          setDataUri('');
+          setDataUri(null);
           return;
         }
     
@@ -92,6 +94,7 @@ export default function AddPeople() {
           })
         
       };
+      
     const remove = ()=>{
         setDataUri(null);
     }
@@ -148,11 +151,11 @@ export default function AddPeople() {
                     </div>
                     <div>
                         <img name="photo" src={dataUri ? dataUri :logo.src} style={photo} />
-                        <button onClick={remove} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                        <button type='button' onClick={remove} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                             Remove
                         </button>
                         <input name='photo' onChange={(event) => onChange(event.target.files[0] || null)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="file" accept="image/*" ref={inputFile} style={{ display: 'none' }} />
-                        <button onClick={onButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style={{ marginLeft: "10px", marginTop: "10px" }}>
+                        <button type="button" onClick={onButtonClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style={{ marginLeft: "10px", marginTop: "10px" }}>
                             Upload Photo
                         </button>
                     </div>
