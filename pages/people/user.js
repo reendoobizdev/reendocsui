@@ -22,10 +22,10 @@ export default function People() {
             fetchData();
         })
       }
-      function routeUser(){
+      function routePeople(){
         // console.log(typeof id)
-         router.push(`/people/user`);
-        
+        router.push(`/people`);
+
       }
 
 
@@ -35,7 +35,7 @@ export default function People() {
       }, [])
 
       const editPeople = async (id) =>{
-        console.log(id);
+
        await router.push(`/people/editpeople?id=${id}`);
       }
 
@@ -56,6 +56,7 @@ export default function People() {
     }
 
 
+
     
 
     // const deletes = deletePeople(id)
@@ -64,11 +65,11 @@ export default function People() {
 
             <div style={mystyle}>
                 <div className='flex' style={{marginBottom : "-5px"}} >
-                    <div onClick={()=>{routeUser()}} className="flex-none w-14 h-14" style={{ width: "15%" }}>
+                    <div  className="flex-none w-14 h-14" style={{ width: "15%" , backgroundColor: "#D0CCCC" }}>
                         <div>User</div>
                         {/* <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." style={{ width: "35px" }} class="shadow rounded-full  align-middle border-none" /> */}
                     </div>
-                    <div className="flex-none w-14 h-14" style={{ width: "15%" , backgroundColor: "#D0CCCC", marginLeft: "30px" }}>
+                    <div onClick={()=>{routePeople()}} className="flex-none w-14 h-14" style={{ width: "15%" , marginLeft: "30px" }}>
                         {/* {user.name} */}
                         <div>People</div>
                     </div>
@@ -76,31 +77,32 @@ export default function People() {
                 <div>
       {users.length > 0 && (
         <div>
-          {users.map(user => (
+          {users.filter(x => x.userId != null).map(user => (
             <div key={user.id} style={{ backgroundColor: "#D0CCCC", width: "100%", marginTop: "10px" }} className="flex">
-              <div className="flex-none w-14 h-14" >
-                <img src={user.photo ? user.photo : "https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg"} alt="..." style={{ width: "35px" }} className="shadow rounded-full  align-middle border-none" />
-              </div>
-              <div className="flex-none w-14 h-14" style={{ width: "15%", marginLeft: "30px" }}>
-                {user.fullName}
-              </div>
-              <div className="flex-none w-14 h-14" style={{ marginLeft: "30%" }}>
-                <p>{user.name}</p>
-              </div>
-              <div className="flex-none w-14 h-14" style={{ marginLeft: "15% " }}>
-              <div className="flex-none w-14 h-14" >
-              <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-12 py-3 px-6 " onClick={()=>{editPeople(user.id)}}>
-                  Edit
-                </button>
-              </div>
-              <div className="flex-none w-14 h-14" style={{ marginLeft: "100% " , marginTop: "-50px"}} >
-                {!user.userId ?  <button  className="bg-blue-500 hover:bg-blue-700 text-white w-14 font-bold py-3 px-6 " onClick={()=>{setToUser(user.id)}}>
-                  Set
-                </button> : null}
-                
-              </div>
-              </div>
+            <div className="flex-none w-14 h-14" >
+              <img src={user.photo ? user.photo : "https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg"} alt="..." style={{ width: "35px" }} className="shadow rounded-full  align-middle border-none" />
             </div>
+            <div className="flex-none w-14 h-14" style={{ width: "15%", marginLeft: "30px" }}>
+              {user.fullName}
+            </div>
+            <div className="flex-none w-14 h-14" style={{ marginLeft: "30%" }}>
+              <p>{user.name}</p>
+            </div>
+            <div className="flex-none w-14 h-14" style={{ marginLeft: "15% " }}>
+            <div className="flex-none w-14 h-14" >
+            <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-12 py-3 px-6 " onClick={()=>{editPeople(user.id)}}>
+                Edit
+              </button>
+            </div>
+            <div className="flex-none w-14 h-14" style={{ marginLeft: "100% " , marginTop: "-50px"}} >
+              {!user.userId ?  <button  className="bg-blue-500 hover:bg-blue-700 text-white w-14 font-bold py-3 px-6 " onClick={()=>{setToUser(user.id)}}>
+                Set
+              </button> : null}
+              
+            </div>
+            </div>
+          </div>
+            
           ))}
         </div>
       )}
