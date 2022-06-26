@@ -88,18 +88,13 @@ export default function People() {
             <div className="flex-none w-14 h-14" style={{ marginLeft: "30%" }}>
               <p>{user.name}</p>
             </div>
-            <div className="flex-none w-14 h-14" style={{ marginLeft: "15% " }}>
-            <div className="flex-none w-14 h-14" >
-            <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-12 py-3 px-6 " onClick={()=>{editPeople(user.id)}}>
+            <div className="flex-none w-24 h-14" style={{ marginLeft: "15% " }}>
+            <div className="flex-none w-24 h-14" >
+            <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-16 py-2 px-4 " onClick={()=>{editPeople(user.id)}}>
                 Edit
               </button>
             </div>
-            <div className="flex-none w-14 h-14" style={{ marginLeft: "100% " , marginTop: "-50px"}} >
-              {!user.userId ?  <button  className="bg-blue-500 hover:bg-blue-700 text-white w-14 font-bold py-3 px-6 " onClick={()=>{setToUser(user.id)}}>
-                Set
-              </button> : null}
-              
-            </div>
+            
             </div>
           </div>
             

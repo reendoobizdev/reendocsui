@@ -64,5 +64,27 @@ export const adminMenu = [
             },
 
         ]
+    },
+    {
+        title: "Department",
+        url: "department",
+        icon: "IoAccessibilityOutline",
+        submenu: [
+            {
+                title: "Add Department",
+                url: "adddepartment"
+            },
+        ]
+    },
+    {
+        title: "Position",
+        url: "position",
+        icon: "IoAccessibilityOutline",
+        submenu: [
+            {
+                title: "Add Position",
+                url: "addposition"
+            },
+        ]
     }
 ];

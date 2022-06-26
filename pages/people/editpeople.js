@@ -3,20 +3,23 @@ import React, { useRef , useState , useEffect } from 'react';
 import { useRouter } from 'next/router';
 import {getDepartment} from '../../service/departmentService';
 import {getPosition} from '../../service/positionService';
-import { getPeopleById } from '../../service/peopleService';
+import { getPeopleById ,updatePeople } from '../../service/peopleService';
 import Select from 'react-select'
 export default function EditPeople() {
     const [departments, setDepartment] = useState([])
     const [positions, setPosition] = useState([])
     const [usersbyid, setUsersById] = useState([])
+
     const router = useRouter()
     const fetchData = async ()=>{
         const id = router.query.id;
         // console.log(id);
         // let id = window.location.search.split('=')[1];
         getPeopleById(id).then(response =>{
-          console.log(response)
-          setUsersById(response)
+        //   console.log(response)
+            setDataUri(response.photo)
+            setUsersById(response);
+          
         })
 
         getDepartment().then(response =>{
@@ -46,37 +49,20 @@ export default function EditPeople() {
         let image = dataUri ? dataUri : null;
         
         const people = {
-            id: 0,
+            id: router.query.id,
             departmentId: event.target.department.value,
             positionId: event.target.position.value,
-            userId: null,
+            userId: usersbyid.userId,
             fullName: event.target.name.value,
             email: event.target.email.value,
             phone: event.target.phone.value,
             photo: image
         };
-        // console.log('terupload');
-        await addPeople(people);
-        router.push(`/people`);
-        // console.log(dataUri.replace('data:image/png;base64,',''))\
-            // (await axios.post("https://localhost:7276/people", { people }))
-            // .then(res => {
-            //     console.log(res);
-            // })
+        console.log(people)
+        updatePeople(router.query.id , people)
+        router.replace('/people')
 
     };
-    const addPeople = async (body) =>{
-        const response = await axios.post('https://localhost:7276/api/People',{
-            id: body.id,
-            departmentId : body.departmentId,
-            positionId : body.positionId,
-            userId : body.userId,
-            fullName: body.fullName,
-            email : body.email,
-            phone : body.phone,
-            photo : body.photo
-        });
-    }
     const inputFile = useRef(null)
     const onButtonClick = () => {
         // `current` points to the mounted file input element
@@ -171,17 +157,12 @@ export default function EditPeople() {
                         </div>
                         <div className="grid  md:grid-cols-2 gap-2">
                             <div> <p>Email Address</p>
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" name='email' />
+                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" name='email' defaultValue={usersbyid.email} />
                             </div>
                         </div>
                         <div className="grid  md:grid-cols-2 gap-2">
                             <div> <p>Phone No </p>
-                                <input name='phone' className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" />
-                            </div>
-                        </div>
-                        <div className="grid  md:grid-cols-2 gap-2">
-                            <div> <p>User Role </p>
-                                <input name='role' className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" />
+                                <input name='phone' className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" defaultValue={usersbyid.phone}/>
                             </div>
                         </div>
                     </div>
