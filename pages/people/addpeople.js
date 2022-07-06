@@ -20,6 +20,9 @@ export default function AddPeople() {
         })
         
       }
+      useEffect(() => {
+        fetchData()
+      }, []);
     const router = useRouter();
     const fileToDataUri = (file) => new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -60,18 +63,29 @@ export default function AddPeople() {
         let image = dataUri ? dataUri : null;
         
         const people = {
-            id: 0,
-            departmentId: event.target.department.value,
-            positionId: event.target.position.value,
+            id: null,
+            departmentId: parseInt(event.target.department.value),
+            positionId: parseInt(event.target.position.value),
             userId: null,
             fullName: event.target.name.value,
             email: event.target.email.value,
             phone: event.target.phone.value,
             photo: image
         };
-        // console.log('terupload');
-        addPeople(people);
-        router.push(`/people`);
+        
+        console.log(people);
+         axios.post('https://localhost:7276/api/People',{
+      id: null,
+      departmentId : people.departmentId,
+      positionId : 1,
+      userId : people.userId,
+      fullName: people.fullName,
+      email : people.email,
+      phone : people.phone,
+      photo : people.photo
+  });
+        // addPeople(people);
+        // router.push(`/people`);
         // console.log(dataUri.replace('data:image/png;base64,',''))\
             // (await axios.post("https://localhost:7276/people", { people }))
             // .then(res => {
@@ -140,7 +154,7 @@ export default function AddPeople() {
                                 {
                                     positions.length > 0 && (
                                     positions.map(position => (
-                                    <option key={position.id} selected={position.id == usersbyid.positionId} value={position.id} >{position.name}</option>
+                                    <option key={position.id} value ={position.id}  >{position.name}</option>
                                         ))
                                     )}
                                     {/* <option value={'test'}>test</option> */}

@@ -94,7 +94,7 @@ export default function People() {
                 
               </div>
               <div className="flex-auto " >
-              {!user.userId ?  <button  className="bg-blue-500 hover:bg-blue-700 text-white  font-bold py-2 px-4 " onClick={()=>{setToUser(user.id)}}>
+              {!user.userId ?  <button  className="bg-blue-500 hover:bg-blue-700 text-white  font-bold py-2 px-4 " style={{marginLeft: '-97px'}} onClick={()=>{setToUser(user.id)}}>
                   Set User
                 </button> : null}
               </div>
