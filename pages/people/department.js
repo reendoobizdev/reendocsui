@@ -26,7 +26,8 @@ export default function Department() {
         padding: "10px",
         margin: "10%",
         height: "100%",
-        fontFamily: "Arial"
+        fontFamily: "Arial",
+        borderRadius: "25px"
     }
     const bold = {
         fontWeight: "bold",
@@ -41,8 +42,8 @@ export default function Department() {
       {departments.length > 0 && (
         <div>
           {departments.map(department => (
-            <div key={department.id} style={{ backgroundColor: "#D0CCCC", width: "100%", marginTop: "10px" }} className="flex">
-              <div className="flex-none w-10 " >
+            <div key={department.id} style={{ backgroundColor: "#D0CCCC", borderRadius: "15px",width: "100%", marginTop: "10px" }} className="flex">
+              <div className="flex-none w-10 " style={{padding: "10px"}} >
                 {department.name}
               
               </div>

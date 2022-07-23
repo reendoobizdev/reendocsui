@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { getPosition } from '../../service/positionService';
 // import axios from 'axios';
 // import Cleave from 'cleave.js/react';
-export default function Department() {
+export default function Position() {
 
     const router = useRouter();
     const [positions, setPosition] = useState([])
@@ -26,7 +26,8 @@ export default function Department() {
         padding: "10px",
         margin: "10%",
         height: "100%",
-        fontFamily: "Arial"
+        fontFamily: "Arial",
+        borderRadius: "10px"
     }
     const bold = {
         fontWeight: "bold",
@@ -41,8 +42,8 @@ export default function Department() {
       {positions.length > 0 && (
         <div>
           {positions.map(position => (
-            <div key={position.id} style={{ backgroundColor: "#D0CCCC", width: "100%", marginTop: "10px" }} className="flex">
-              <div className="flex-none w-10 " >
+            <div key={position.id} style={{ backgroundColor: "#D0CCCC",borderRadius: "15px" ,width: "100%", marginTop: "10px" }} className="flex">
+              <div className="flex-none w-10 " style={{padding : "10px"}} >
                 {position.name}
               
               </div>

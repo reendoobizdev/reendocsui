@@ -116,7 +116,7 @@ export default function EditPeople() {
       <form onSubmit={submitContact}>
                 <div className="grid  md:grid-cols-2 gap-2">
                     <section>
-                        <p style={bold}>Add People </p>
+                        <p style={bold}>Edit People </p>
                     </section>
                 </div>
                 <div className="grid md:grid-cols-2 gap-2">
